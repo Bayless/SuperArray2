@@ -18,13 +18,13 @@ public class SuperArray implements ListInt {
 
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:
-    protected int[] _data;
+    private int[] _data;
 
     //position of last meaningful value
-    protected int _lastPos;
+    private int _lastPos;
 
     //size of this instance of SuperArray
-    protected int _size;
+    private  int _size;
 
     //accessors so the interface has access
     public int[] getData(){
@@ -51,9 +51,9 @@ public class SuperArray implements ListInt {
     //~~~~~METHODS~~~~~
     //default constructor ¡V initializes 10-item array
     public SuperArray() {
-	_data = new int[10];
-	_lastPos = -1;
-	_size = 0;
+	_data = (new int[10]);
+	_lastPos = (-1);
+	_size=(0);
     }
 
 		
@@ -75,12 +75,14 @@ public class SuperArray implements ListInt {
 
 		
     //double capacity of this SuperArray
-    private void expand() { 
-	int[] newArr = new int[2 * getData().length];
-	for (int i = 0; i < _lastPos(); i++){
-	    newArr[i] = _data[i];
+    private void expand() {
+	int [] newData = getData();
+	int[] newArr = new int[2 *getData().length];
+	for (int i = 0; i < getLastPos(); i++){
+	    newArr[i] = newData[i];
 	}
-	_data = newArr;
+	newData = newArr;
+	setData(newData);
     }
 
 
@@ -89,17 +91,14 @@ public class SuperArray implements ListInt {
     public int get( int index ) { 
 	return getData()[index];	
 	}
-
-    //accessor -- return _data length
-    public int get_dataLength() {
-	return getData().length;
-    }
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
-    public int set( int index, int newVal ) { 
+    public int set( int index, int newVal ) {
+	int[] newData = getData();
 	int temp = getData()[index];
-	_data[index] = newVal;
+	newData[index] = newVal;
+	setData(newData);
 	return temp;
 	
     }
@@ -107,9 +106,11 @@ public class SuperArray implements ListInt {
   // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
     //adds an item after the last item
     public void add( int newVal ) {
-	if (_size == getData().length)
+	if (getSize() == getData().length)
 		expand();
-	_data[_size] = newVal;
+	int[] newData = getData();
+	newData[getSize()] = newVal;
+	setData(newData);
 	setSize(getSize() + 1);
 	setLastPos(getLastPos() + 1);
     }
@@ -118,15 +119,17 @@ public class SuperArray implements ListInt {
     //inserts an item at index
     //shifts existing elements to the right
     public void add( int index, int newVal ) {
+	int[] newData = getData();
 	if (index >= getSize()){
 		//Let's throw an error!
 	}
 	if (getSize() == getData().length)
 		expand();
-	for (int i = _size; i > index + 1; i--){
-	    _data[i] = _data[i - 1];
+	for (int i = getSize(); i > index + 1; i--){
+	    newData[i] = newData[i - 1];
 	}
-	_data[index] = newVal;
+	newData[index] = newVal;
+	setData(newData);
 	setSize(getSize() + 1);
 	setLastPos(getLastPos() + 1);
     }
@@ -135,8 +138,9 @@ public class SuperArray implements ListInt {
     //removes the item at index
     //shifts elements left to fill in newly-emptied slot
     public void remove( int index ) {
-	for (int i = index; i < _lastPos; i++)
-		_data[i] = _data[i + 1];
+	int[] newData = getData();
+	for (int i = index; i < getLastPos(); i++)
+		newData[i] = newData[i + 1];
 	setSize(getSize()- 1);
 	setLastPos(getLastPos() - 1);
 	}
@@ -156,20 +160,21 @@ public class SuperArray implements ListInt {
 	ListInt curtis = new SuperArray();
 	System.out.println("Printing empty SuperArray curtis...");
 	System.out.println(curtis);
-	for( int i = 0; i < curtis.getData().length; i++ ) {
+	System.out.println(curtis.getData());
+	for( int i = 0; i < curtis._data.length; i++ ) {
 	    curtis.add(i,i*2);
 	}
 	System.out.println("Printing populated SuperArray curtis...");
 	System.out.println(curtis);
 	System.out.println("testing get()...");
-	for( int i = 0; i < curtis.getSize(); i++ ) {
+	for( int i = 0; i < curtis._size; i++ ) {
 	    System.out.print( "item at index " + i + ":\t" );
 	    System.out.println( curtis.get(i) );
 	}
 	ListInt bayle = new SuperArray();
 	System.out.println("Printing empty bayle");
 	System.out.println(bayle);
-	for (int i = 0; i < bayle.getData().length; i++){
+	for (int i = 0; i < bayle._data.length; i++){
 	    bayle.add(i * 3);
 	}
 	System.out.println("Printing numberified bayle...");
