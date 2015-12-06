@@ -36,6 +36,16 @@ public class SuperArray implements ListInt {
     public int getSize(){
 	return _size;
     }
+        //setters so the interface has access
+    public void setData(int[] array){
+	_data = array;
+    }
+    public void setLastPos(int pos){
+	_lastPos = pos;
+    }
+    public void setSize(int s){
+	_size = s;
+    }
 
 		
     //~~~~~METHODS~~~~~
@@ -53,10 +63,10 @@ public class SuperArray implements ListInt {
     public String toString() {
 	String s = "[";
 	for (int i = 0; i < _size; i++){
-	    s += _data[i];
+	    s += getData()[i];
 	    s += ",";
 	}
-	if (_size > 0){
+	if (getSize() > 0){
 	    s = s.substring(0,s.length() - 1);
 	}
 	s += "]";
@@ -66,8 +76,8 @@ public class SuperArray implements ListInt {
 		
     //double capacity of this SuperArray
     private void expand() { 
-	int[] newArr = new int[2 * _data.length];
-	for (int i = 0; i < _lastPos; i++){
+	int[] newArr = new int[2 * getData().length];
+	for (int i = 0; i < _lastPos(); i++){
 	    newArr[i] = _data[i];
 	}
 	_data = newArr;
@@ -77,18 +87,18 @@ public class SuperArray implements ListInt {
 		
     //accessor -- return value at specified index
     public int get( int index ) { 
-	return _data[index];	
+	return getData()[index];	
 	}
 
     //accessor -- return _data length
     public int get_dataLength() {
-	return _data.length;
+	return getData().length;
     }
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
     public int set( int index, int newVal ) { 
-	int temp = _data[index];
+	int temp = getData()[index];
 	_data[index] = newVal;
 	return temp;
 	
@@ -97,28 +107,28 @@ public class SuperArray implements ListInt {
   // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
     //adds an item after the last item
     public void add( int newVal ) {
-	if (_size == _data.length)
+	if (_size == getData().length)
 		expand();
 	_data[_size] = newVal;
-	_size +=1;
-	_lastPos += 1;
+	setSize(getSize() + 1);
+	setLastPos(getLastPos() + 1);
     }
 
 
     //inserts an item at index
     //shifts existing elements to the right
     public void add( int index, int newVal ) {
-	if (index >= _size){
+	if (index >= getSize()){
 		//Let's throw an error!
 	}
-	if (_size == _data.length)
+	if (getSize() == getData().length)
 		expand();
 	for (int i = _size; i > index + 1; i--){
 	    _data[i] = _data[i - 1];
 	}
 	_data[index] = newVal;
-	_lastPos += 1;
-	_size +=1;
+	setSize(getSize() + 1);
+	setLastPos(getLastPos() + 1);
     }
 
 
@@ -127,14 +137,14 @@ public class SuperArray implements ListInt {
     public void remove( int index ) {
 	for (int i = index; i < _lastPos; i++)
 		_data[i] = _data[i + 1];
-	_lastPos -= 1;
-	_size -= 1;
+	setSize(getSize()- 1);
+	setLastPos(getLastPos() - 1);
 	}
 
 
     //return number of meaningful items in _data
     public int size() {
-		return _size;
+	return getSize();
     }
 
 
@@ -146,20 +156,20 @@ public class SuperArray implements ListInt {
 	ListInt curtis = new SuperArray();
 	System.out.println("Printing empty SuperArray curtis...");
 	System.out.println(curtis);
-	for( int i = 0; i < curtis._data.length; i++ ) {
+	for( int i = 0; i < curtis.getData().length; i++ ) {
 	    curtis.add(i,i*2);
 	}
 	System.out.println("Printing populated SuperArray curtis...");
 	System.out.println(curtis);
 	System.out.println("testing get()...");
-	for( int i = 0; i < curtis._size; i++ ) {
+	for( int i = 0; i < curtis.getSize(); i++ ) {
 	    System.out.print( "item at index " + i + ":\t" );
 	    System.out.println( curtis.get(i) );
 	}
 	ListInt bayle = new SuperArray();
 	System.out.println("Printing empty bayle");
 	System.out.println(bayle);
-	for (int i = 0; i < bayle._data.length; i++){
+	for (int i = 0; i < bayle.getData().length; i++){
 	    bayle.add(i * 3);
 	}
 	System.out.println("Printing numberified bayle...");
