@@ -160,21 +160,20 @@ public class SuperArray implements ListInt {
 	ListInt curtis = new SuperArray();
 	System.out.println("Printing empty SuperArray curtis...");
 	System.out.println(curtis);
-	System.out.println(curtis.getData());
-	for( int i = 0; i < curtis._data.length; i++ ) {
+	for( int i = 0; i < 10; i++ ) {
 	    curtis.add(i,i*2);
 	}
 	System.out.println("Printing populated SuperArray curtis...");
 	System.out.println(curtis);
 	System.out.println("testing get()...");
-	for( int i = 0; i < curtis._size; i++ ) {
+	for( int i = 0; i < 10; i++ ) {
 	    System.out.print( "item at index " + i + ":\t" );
 	    System.out.println( curtis.get(i) );
 	}
 	ListInt bayle = new SuperArray();
 	System.out.println("Printing empty bayle");
 	System.out.println(bayle);
-	for (int i = 0; i < bayle._data.length; i++){
+	for (int i = 0; i < 10; i++){
 	    bayle.add(i * 3);
 	}
 	System.out.println("Printing numberified bayle...");
