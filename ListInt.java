@@ -50,4 +50,7 @@ public interface ListInt{
             Size is changed.
      */
     public void add(int index, int newVal);
+    public int[] getData();
+    public int getSize();
+    public int getLastPos();
 }

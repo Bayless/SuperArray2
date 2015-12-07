@@ -77,7 +77,7 @@ public class SuperArray implements ListInt {
     //double capacity of this SuperArray
     private void expand() { 
 	int[] newArr = new int[2 * getData().length];
-	for (int i = 0; i < _lastPos(); i++){
+	for (int i = 0; i < getLastPos(); i++){
 	    newArr[i] = _data[i];
 	}
 	_data = newArr;
